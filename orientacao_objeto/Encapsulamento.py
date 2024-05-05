@@ -7,6 +7,11 @@ class Conta:
 
     def depositar(self, valor):
         self._saldo += valor
+
+    def mostrarSaldo(self):
+        return self._saldo    
+
+
     def __str__(self):
         return f"{self.__class__.__name__}: {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"    
     
@@ -17,3 +22,4 @@ conta = Conta("0001",100)
 conta.depositar(100)
 print(conta._saldo) # esse nao é o jeito correto de acessar uma variavel, mas ele permite
 print(conta)
+print(conta.mostrarSaldo())
