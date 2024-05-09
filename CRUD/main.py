@@ -8,18 +8,25 @@ conexao = psycopg2.connect(
     password="An0025322"
 )
 
-# Criar um cursor
+# Criar um cursor . vai executar os comendos
 cursor = conexao.cursor()
 
-# Executar comandos SQL
-cursor.execute("select * from vendas")
-registros = cursor.fetchall()
+# Crud Aqui
+id_vendas = 1
+nome_produto = "todynho"
+valor = 6
 
-# Exemplo: imprimir registros
-for registro in registros:
-    print(registro)
+comando = f"INSERT INTO vendas (id_vendas, nome_produto, valor) VALUES ({id_vendas}, '{nome_produto}', {valor})"
+
+
+#cursor.execute(comando)
+#conexao.commit() # editar o banco
+#resultado = cursor.fetchall()  # ler o banco
+
+
+
+
 
 # Fechar o cursor e a conexão
 cursor.close()
 conexao.close()
-

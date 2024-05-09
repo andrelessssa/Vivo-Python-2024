@@ -6,7 +6,12 @@ class ControleRemoto(ABC):   #Aqui eu falo que é uma extencao de ABC
         pass
     @abstractmethod    
     def desligar(self):
-        pass        
+        pass  
+
+    @property
+    @abstractmethod
+    def marca(self):
+        pass      
 
 class ControleTv(ControleRemoto): # agora eu soi obrigado a implementar esses dois metodos
     def ligar(self):
@@ -17,12 +22,24 @@ class ControleTv(ControleRemoto): # agora eu soi obrigado a implementar esses do
         print("Desligando a TV...")
 
 
+
+    @property
+    def marca(self):
+        return "LG"     
+    
+
+
 class ContrleArCondicionado(ControleRemoto):
     def ligar(self):
         print("Ligando Ar Condicionado")
 
     def desligar(self):
-        print("desligando...")   
+        print("desligando...")  
+
+    @property
+    def marca(self):
+        return "LG"
+
 
 
 
@@ -33,3 +50,4 @@ controle.desligar()
 
 controle = ContrleArCondicionado()
 controle.ligar()
+print(controle.marca)
