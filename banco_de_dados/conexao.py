@@ -38,10 +38,34 @@ try:
         cur.execute("DELETE FROM cliente WHERE id= %s", data)
         conn.commit()
 
+    def inserir_muitos(conn, cur, dados):
+        cur.executemany("INSERT INTO cliente(nome, email) VALUES (%s, %s)", dados)
+        conn.commit()
+
+    def recuperar_cliente( cur, id):
+        cur.execute("SELECT * FROM cliente WHERE id = %s", (id,))
+        return cur.fetchone()
+    
+    def listar_clientes(cur):
+        cur.execute("SELECT * FROM cliente ORDER BY nome;")
+        return cur.fetchall()
+
+    cliente = recuperar_cliente(cur, 2)
+    print(cliente)    
+        
+    
+    clientes = listar_clientes(cur)
+    for cliente in clientes:
+        print(cliente)
+
+
 
     #atualizar_registro(conn, cur, "gui lessa","gui@gmail.com", 1)
     #inserir_registro(conn, cur, "André", "andre@gmail.com")
     #excluir_registro(conn, cur, 1)
+    #inserir_muitos(conn, cur, [("gui", "gui@gmail.com"), ("MeuTeste","meu@gmailcom")])
+
+
 
     # Commit the transaction
     conn.commit()
