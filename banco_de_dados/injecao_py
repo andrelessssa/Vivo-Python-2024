@@ -1,0 +1,41 @@
+import psycopg2
+
+try:
+    # Conectar ao banco de dados PostgreSQL
+    conn = psycopg2.connect(
+        dbname="dbpython",
+        user="postgres",
+        password="An0025322",  # substitua "sua_senha" pela sua senha real
+        host="localhost",
+        port="5432"
+    )
+
+    # Abrir um cursor para executar operações no banco de dados
+    cur = conn.cursor()
+
+    id = input("informe o id do cliente: ")
+    cur.execute('SELECT * FROM cliente WHERE id=%s', (id,))
+    
+    # Obter o resultado da consulta
+    cliente = cur.fetchone()
+    
+    if cliente:
+        # Transformar o resultado em um dicionário
+        colnames = [desc[0] for desc in cur.description]
+        cliente_dict = dict(zip(colnames, cliente))
+        print(cliente_dict)
+    else:
+        print("Cliente não encontrado")
+
+    # Confirmar a transação, se necessário
+    conn.commit()
+
+except Exception as e:
+    print(f"Erro ao conectar ou executar a query: {e}")
+
+finally:
+    # Fechar o cursor e a conexão com o banco de dados
+    if cur:
+        cur.close()
+    if conn:
+        conn.close()
